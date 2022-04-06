@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">어항관리</string>
+    <string name="move">Move</string>
+    <string name="settings">SETTINGS</string>
+    <string name="mb_move_direction">mb_move_direction</string>
+    <string name="mb_movement_right">mb_movement_right</string>
+    <string name="mb_movement_top">mb_movement_top</string>
+    <string name="mb_movement_bottom">mb_movement_bottom</string>
+    <string name="mb_offset_inner">mb_offset_inner</string>
+    <string name="mb_offset_outer">mb_offset_outer</string>
+    <string name="mb_event_volume">mb_event_volume</string>
+    <string name="mb_vibration_duration">mb_vibration_duration</string>
+    <string name="mb_movement_left">mb_movement_left</string>
+    <string name="current_position">CURRENT POSITION</string>
+    <string name="choose">Choose</string>
+    <string name="cancel">Cancel</string>
+    <string name="move_direction">Move Direction</string>
+    <string name="vibration_duration">Vibration Duration</string>
+    <string name="ok">OK</string>
+    <string name="movement_left">Movement Left</string>
+    <string name="movement_right">Movement Right</string>
+    <string name="movement_top">Movement Top</string>
+    <string name="movement_bottom">Movement Bottom</string>
+    <string name="inner_offset">Inner Offset</string>
+    <string name="outer_offset">Outer Offset</string>
+    <string name="volume">Volume</string>
+</resources>

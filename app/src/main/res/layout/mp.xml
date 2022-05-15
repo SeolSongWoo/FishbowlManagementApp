@@ -47,20 +47,47 @@
                     android:background="@drawable/ic_inner_offset" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
                         android:text="수질: "
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/Nthresult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/accent"
+                        android:textSize="16dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:textSize="10dp"
+                             android:text="현재NTU : "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10dp"
+                            android:id="@+id/SetNtu"/>
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -82,15 +109,33 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
                         android:text="수온: "
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/Temresult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/accent"
+                        android:textSize="16dp" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/TempRange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:text="적정수온(21~24)"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -113,15 +158,33 @@
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
                         android:text="PH: "
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
-
+                    <TextView
+                        android:id="@+id/Phresult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/accent"
+                        android:textSize="16dp" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/PhRange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:text="적정PH(4~6)"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -137,7 +200,16 @@
                 android:textStyle="bold"
                 android:includeFontPadding="false" />
 
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
                 android:id="@+id/Mpage1"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -160,7 +232,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/move_direction_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -208,7 +279,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/movement_left_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -256,7 +326,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/movement_right_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -304,7 +373,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/movement_top_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -352,12 +420,58 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/movement_bottom_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
                         android:text="커뮤니티"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="설명"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="74dp"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/Mpage6"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/ic_movement" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:includeFontPadding="false"
+                        android:text="환경설정"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -423,7 +537,8 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="74dp"
                 android:background="@color/divider" />
-
+            </LinearLayout>
+            </ScrollView>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

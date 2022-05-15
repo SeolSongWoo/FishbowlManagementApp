@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".page6Activity">
 
 
 
@@ -17,130 +17,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="어항상태"
-                    android:textColor="@color/accent"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:includeFontPadding="false" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical">
-
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/ic_inner_offset" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:includeFontPadding="false"
-                        android:text="현재 NTU 수치: "
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/Nthresult2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/accent"
-                        android:textSize="25dp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical">
-
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/ic_inner_offset" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:includeFontPadding="false"
-                        android:text="현재 PH수치: "
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/Phresult2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/accent"
-                        android:textSize="25dp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="바로가기"
+                android:includeFontPadding="false"
+                android:text="환경설정"
                 android:textColor="@color/accent"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                android:includeFontPadding="false" />
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/Mpage1_1"
+                android:id="@+id/Setcase1"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="65dp"
                 android:background="@drawable/selector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical">
-
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/ic_direction" />
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,19 +47,22 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/move_direction_tv"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="그래프"
+                        android:text="케이스1"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="설명"
+                        android:text="설정하기"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="10dp" />
                 </LinearLayout>
@@ -171,23 +71,17 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="74dp"
                 android:background="@color/divider" />
 
             <LinearLayout
-                android:id="@+id/Mpage1_2"
+                android:id="@+id/Setcase2"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="73dp"
                 android:background="@drawable/selector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical">
-
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/ic_movement" />
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -197,19 +91,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="카메라"
+                        android:text="케이스2"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="설명"
+                        android:text="설정하기"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="10dp" />
                 </LinearLayout>
@@ -218,23 +114,17 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="74dp"
                 android:background="@color/divider" />
 
             <LinearLayout
-                android:id="@+id/Mpage1_3"
+                android:id="@+id/Setcase3"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="73dp"
                 android:background="@drawable/selector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical">
-
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/ic_movement" />
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -244,23 +134,113 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="순환"
+                        android:text="케이스3"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="설명"
+                        android:text="설정하기"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="10dp" />
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/Setcase4"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
+                android:background="@drawable/selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:includeFontPadding="false"
+                        android:text="케이스4"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="설정하기"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:id="@+id/Setcase5"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
+                android:background="@drawable/selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:includeFontPadding="false"
+                        android:text="개인설정"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="설정하기"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
 
         </LinearLayout>
     </LinearLayout>

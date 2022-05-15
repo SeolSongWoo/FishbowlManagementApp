@@ -28,8 +28,7 @@ public class page2Activity extends AppCompatActivity {
 
 
     LinearLayout Mpage2_1,Mpage2_2;
-    TextView dbtest;
-    DBHelper dbHelper;
+    TextView dbtest,AutoManual;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -44,12 +43,18 @@ public class page2Activity extends AppCompatActivity {
         Mpage2_1 = findViewById(R.id.Mpage2_1);
         Mpage2_2 = findViewById(R.id.Mpage2_2);
         dbtest = findViewById(R.id.dbtest);
-        dbHelper = new DBHelper(page2Activity.this,1);
+        AutoManual = findViewById(R.id.AutoManual);
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
         if(pref.getInt("auto",0) == 1) {
             Mpage2_2.setEnabled(false);
             Mpage2_2.setBackgroundColor(R.color.disable);
+            AutoManual.setText("자동상태");
+            dbtest.setText("설정된 시간 : "+String.valueOf(pref.getInt("setTime",0))+"시"+String.valueOf(pref.getInt("setMinute",0))+"분");
+        }
+        else {
+            AutoManual.setText("수동상태");
+            dbtest.setText("수동 먹이주기 상태입니다.");
         }
 
         Mpage2_1.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +103,6 @@ public class page2Activity extends AppCompatActivity {
         Mpage2_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbtest.setText(String.valueOf(pref.getInt("setTime",0))+String.valueOf(pref.getInt("setMinute",0)));
                 AlertDialog.Builder dlg = new AlertDialog.Builder(page2Activity.this);
                 dlg.setTitle("먹이주기");
                 dlg.setMessage("먹이를 주시겠습니까?");

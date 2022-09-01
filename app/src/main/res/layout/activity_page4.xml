@@ -20,17 +20,23 @@
         android:layout_marginTop="50dp"
         android:layout_width="100dp"
         android:layout_height="100dp" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
+    <Button
+        android:id="@+id/rgbApply2"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:text="조명ON" />
         <Button
-            android:id="@+id/rgbApply2"
+            android:id="@+id/rgbApply1"
             android:layout_width="106dp"
             android:layout_height="wrap_content"
-            android:text="조명작동" />
-    </LinearLayout>
+            android:text="조명OFF" />
+
+    <Button
+        android:id="@+id/RgbMode1"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:text="모드1" />
 
 
 </LinearLayout>

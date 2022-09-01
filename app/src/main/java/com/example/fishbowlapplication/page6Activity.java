@@ -2,23 +2,33 @@ package com.example.fishbowlapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.PrecomputedTextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Set;
+import java.util.zip.Inflater;
 
 public class page6Activity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout Setcase1, Setcase2, Setcase3, Setcase4, Setcase5;
+    EditText editPriavteTemp1,editPriavteTemp2,editPriavtePh1,editPriavtePh2;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    LinearLayout dialoginputLayout;
+    View header;
+    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,13 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
         Setcase3 = findViewById(R.id.Setcase3);
         Setcase4 = findViewById(R.id.Setcase4);
         Setcase5 = findViewById(R.id.Setcase5);
+        inflater = getLayoutInflater();
+        header = inflater.inflate(R.layout.dialoginput,null);
+        dialoginputLayout = header.findViewById(R.id.dialoginputLayout);
+        editPriavtePh1 = header.findViewById(R.id.editPriavtePh1);
+        editPriavtePh2 = header.findViewById(R.id.editPriavtePh2);
+        editPriavteTemp1 = header.findViewById(R.id.editPriavteTemp1);
+        editPriavteTemp2 = header.findViewById(R.id.editPriavteTemp2);
         Setcase1.setOnClickListener(this);
         Setcase2.setOnClickListener(this);
         Setcase3.setOnClickListener(this);
@@ -110,20 +127,61 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.show();
                 break;
             case R.id.Setcase5:
-                dlg.setTitle("케이스5 설정");
-                dlg.setMessage("케이스5으로 환경설정 하시겠습니까?\n적정수온 : 19~23도 | 적정PH : 6~8");
-                dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 19);
-                        editor.putInt("SetTemp2", 23);
-                        editor.putInt("SetPh1",6);
-                        editor.putInt("SetPh2",8);
-                        editor.apply();
-                    }
-                });
-                dlg.setNegativeButton("아니요", null);
-                dlg.show();
+                if(pref.getInt("PrivateSet",0) == 1) {
+                    dlg.setTitle("개인설정적용");
+                    dlg.setMessage("개인설정을 완료하셨습니다.\n해당설정을 적용하시겠습니까?\n적정수온 : "+pref.getInt("SetPriTemp1",0)+"~"+pref.getInt("SetPriTemp2",0)+"도 | 적정PH : "+pref.getInt("SetPriPh1",0)+"~"+pref.getInt("SetPriPh2",0)+"");
+                    dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            editor.putInt("SetTemp1", pref.getInt("SetPriTemp1",0));
+                            editor.putInt("SetTemp2", pref.getInt("SetPriTemp2",0));
+                            editor.putInt("SetPh1",pref.getInt("SetPriPh1",0));
+                            editor.putInt("SetPh2",pref.getInt("SetPriPh2",0));
+                            editor.apply();
+                        }
+                    });
+                    dlg.setNeutralButton("재설정", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            AlertDialog.Builder dlg2 = new AlertDialog.Builder(page6Activity.this);
+                            dlg2.setTitle("개인설정");
+                            if(dialoginputLayout.getParent() != null) ((ViewGroup) dialoginputLayout.getParent()).removeView(dialoginputLayout);
+                            dlg2.setView(dialoginputLayout);
+                            dlg2.setPositiveButton("완료", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    editor.putInt("SetPriTemp1", Integer.parseInt(editPriavteTemp1.getText().toString()));
+                                    editor.putInt("SetPriTemp2", Integer.parseInt(editPriavteTemp2.getText().toString()));
+                                    editor.putInt("SetPriPh1",Integer.parseInt(editPriavtePh1.getText().toString()));
+                                    editor.putInt("SetPriPh2",Integer.parseInt(editPriavtePh2.getText().toString()));
+                                    editor.apply();
+                                }
+                            });
+                            dlg2.setNegativeButton("취소", null);
+                            dlg2.show();
+                        }
+                    });
+                    dlg.setNegativeButton("아니요", null);
+                    dlg.show();
+                }
+                else {
+                    dlg.setTitle("개인설정");
+                    if(dialoginputLayout.getParent() != null) ((ViewGroup) dialoginputLayout.getParent()).removeView(dialoginputLayout);
+                    dlg.setView(dialoginputLayout);
+                    dlg.setPositiveButton("완료", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            editor.putInt("SetPriTemp1", Integer.parseInt(editPriavteTemp1.getText().toString()));
+                            editor.putInt("SetPriTemp2", Integer.parseInt(editPriavteTemp2.getText().toString()));
+                            editor.putInt("SetPriPh1",Integer.parseInt(editPriavtePh1.getText().toString()));
+                            editor.putInt("SetPriPh2",Integer.parseInt(editPriavtePh2.getText().toString()));
+                            editor.putInt("PrivateSet",1);
+                            editor.apply();
+                        }
+                    });
+                    dlg.setNegativeButton("취소", null);
+                    dlg.show();
+                }
                 break;
         }
     }

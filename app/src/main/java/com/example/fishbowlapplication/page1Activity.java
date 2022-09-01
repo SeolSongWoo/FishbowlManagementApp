@@ -11,9 +11,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.UnsupportedEncodingException;
+
+import static com.example.fishbowlapplication.StartActivity.BT_MESSAGE_READ;
 
 public class page1Activity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout Mpage1_1,Mpage1_2,Mpage1_3;
@@ -22,13 +27,30 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
     TextView Nturesult2,Phresult2;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    String[] array;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onResume() {
         dbHelper = new DBHelper(page1Activity.this, 1);
-        //Nturesult2.setText(Integer.toString(dbHelper.LastNtuResult2()));
-        //Phresult2.setText(String.valueOf(dbHelper.LastPhResult()));
+        /*
+        ((StartActivity) StartActivity.context).mBluetoothHandler = new Handler() {
+            public void handleMessage(android.os.Message msg) {
+                if (msg.what == BT_MESSAGE_READ) {
+                    String readMessageNtu = null;
+                    try {
+                        readMessageNtu = new String((byte[]) msg.obj, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    array = readMessageNtu.split(",");
+                    Nturesult2.setText(array[0]);
+                    Phresult2.setText(array[1]);
+                }
+            }
+        };
+
+         */
         super.onResume();
     }
     @Override
@@ -66,7 +88,9 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+                                ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("16,0,0,0");
+                            }
                         }
                     });
                     dlg.setNegativeButton("아니요", null);
@@ -81,7 +105,9 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+                                ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("17,0,0,0");
+                            }
                         }
                     });
                     dlg.setNegativeButton("아니요", null);

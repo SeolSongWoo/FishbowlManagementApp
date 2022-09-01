@@ -53,7 +53,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="1. 네이버"
+                        android:text="1. 어항속 이야기 (네이버)"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -96,7 +96,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="2. 다음"
+                        android:text="2. 한국 관상어 클럽 (네이버)"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -139,7 +139,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="3. 줌"
+                        android:text="3. 작은 어항 (네이버)"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -181,7 +181,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="4. 네이트"
+                        android:text="4. 구피사랑 (네이버)"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -223,7 +223,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="5. 구글"
+                        android:text="5. 작은개울 홈다리 (네이버)"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 

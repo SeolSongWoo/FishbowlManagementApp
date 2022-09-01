@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Mpage5.setOnClickListener(this);
         Mpage6.setOnClickListener(this);
         DBTEST.setOnClickListener(this);
-
+/*
         ((StartActivity) StartActivity.context).mBluetoothHandler = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == BT_MESSAGE_READ) {
@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
+
+ */
     }
 
     @Override

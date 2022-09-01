@@ -193,8 +193,15 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
                     yRAxis.setDrawLabels(false);
                     yRAxis.setDrawAxisLine(false);
                     yRAxis.setDrawGridLines(false);
-                    yLAxis.setAxisMinimum(20);
-                    yRAxis.setAxisMinimum(20);
+
+                    if(pref.getInt("Spinner24",0) == 1 ) {
+                        yLAxis.setAxisMinimum(24);
+                        yRAxis.setAxisMinimum(20);
+                    }
+                    else if(pref.getInt("Spinner24",0) == 0) {
+                        yLAxis.setAxisMinimum(24);
+                        yRAxis.setAxisMinimum(24);
+                    }
                     Description description = new Description();
                     description.setText("");
 

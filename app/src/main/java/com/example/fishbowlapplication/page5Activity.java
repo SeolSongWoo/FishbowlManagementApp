@@ -24,7 +24,7 @@ public class page5Activity extends AppCompatActivity {
         Murl1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.naver.com"));
+                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://cafe.naver.com/kts4565"));
                 startActivity(urlintent);
             }
         });
@@ -32,7 +32,7 @@ public class page5Activity extends AppCompatActivity {
         Murl2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.daum.net"));
+                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/purplebtrd1"));
                 startActivity(urlintent);
             }
         });
@@ -40,7 +40,7 @@ public class page5Activity extends AppCompatActivity {
         Murl3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.zum.com/"));
+                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/fishbowlstory"));
                 startActivity(urlintent);
             }
         });
@@ -48,7 +48,7 @@ public class page5Activity extends AppCompatActivity {
         Murl4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.nate.com"));
+                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/gupilove"));
                 startActivity(urlintent);
             }
         });
@@ -56,7 +56,7 @@ public class page5Activity extends AppCompatActivity {
         Murl5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.co.kr"));
+                Intent urlintent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/hby"));
                 startActivity(urlintent);
             }
         });

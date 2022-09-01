@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".page6Activity"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".page1Activity" />
         <activity android:name=".DBTESTActivity" />
         <activity android:name=".Main2_2Activity" />
         <activity android:name=".page1_2Activity" />
@@ -20,8 +20,8 @@
         <activity android:name=".page4Activity" />
         <activity android:name=".page3Activity" />
         <activity android:name=".page2Activity" />
-        <activity android:name=".page1Activity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".MainActivity">
+        <!-- <activity android:name=".StartActivity"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

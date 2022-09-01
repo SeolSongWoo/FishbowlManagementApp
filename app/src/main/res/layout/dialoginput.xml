@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialoginputLayout"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="적정 수온 범위 입력: "/>
+        <EditText
+            android:id="@+id/editPriavteTemp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:ems="2"
+            android:hint="15"
+            android:textColorHint="@color/divider"
+            android:inputType="number" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="~"/>
+        <EditText
+            android:id="@+id/editPriavteTemp2"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/divider"
+            android:hint="30"
+            android:ems="2"
+            android:inputType="number" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginLeft="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="적정 Ph 범위 입력: "/>
+        <EditText
+            android:id="@+id/editPriavtePh1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColorHint="@color/divider"
+            android:hint="1"
+            android:ems="2"
+            android:inputType="number" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="~"/>
+        <EditText
+            android:id="@+id/editPriavtePh2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColorHint="@color/divider"
+            android:hint="9"
+            android:ems="2"
+            android:inputType="number" />
+    </LinearLayout>
+
+</LinearLayout>

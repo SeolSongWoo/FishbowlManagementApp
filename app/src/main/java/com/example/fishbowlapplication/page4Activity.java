@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class page4Activity extends AppCompatActivity {
     View color_view;
     Bitmap bitmap;
     int bitheight,bitwidth,r,g,b;
-    Button rgbApply;
+    Button rgbON,rgbOFF,rgbMode1;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     @Override
@@ -34,7 +35,9 @@ public class page4Activity extends AppCompatActivity {
 
         RGBControl = findViewById(R.id.RGBControl);
         color_view = findViewById(R.id.color_view);
-        rgbApply = findViewById(R.id.rgbApply2);
+        rgbON = findViewById(R.id.rgbApply2);
+        rgbOFF = findViewById(R.id.rgbApply1);
+        rgbMode1 = findViewById(R.id.RgbMode1);
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
         color_view.setBackgroundColor(Color.rgb(pref.getInt("r",0),pref.getInt("g",0),pref.getInt("b",0)));
@@ -66,13 +69,36 @@ public class page4Activity extends AppCompatActivity {
                 return true;
             }
         });
-        rgbApply.setOnClickListener(new View.OnClickListener() {
+        rgbON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int R,G,B;
                 editor.putInt("r", r);
                 editor.putInt("g", g);
                 editor.putInt("b", b);
                 editor.apply();
+                R = pref.getInt("r",0);
+                G = pref.getInt("g",0);
+                B = pref.getInt("b",0);
+                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+                    ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("11"+","+Integer.toString(R)+","+Integer.toString(G)+","+Integer.toString(B));
+                }
+            }
+        });
+        rgbOFF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+                    ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("12,0,0,0");
+                }
+            }
+        });
+        rgbMode1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+                    ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("13,0,0,0");
+                }
             }
         });
     }

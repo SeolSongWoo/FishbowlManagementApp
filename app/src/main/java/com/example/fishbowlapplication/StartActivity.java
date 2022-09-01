@@ -14,10 +14,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -36,10 +38,11 @@ import java.util.UUID;
 public class StartActivity extends AppCompatActivity {
     int run[] = new int[6];
     int Sfinish=0;
-    TextView BTPairing,NtuConnect,PhConnect,TempConnect,CameraConnect,LEDConnect,TestNtuData,TestTempData;
-    ProgressBar Loading;
+    TextView BTPairing,NtuConnect,PhConnect,TempConnect,CameraConnect,LEDConnect,StConnect;
+    ProgressDialog Loading;
     String[] array;
-    Button gogogo;
+    View header;
+    LayoutInflater inflater;
     public static Context context;
 
     BluetoothAdapter mBluetoothAdapter;
@@ -66,12 +69,21 @@ public class StartActivity extends AppCompatActivity {
         TempConnect = findViewById(R.id.TempConnect);
         CameraConnect = findViewById(R.id.CameraConnect);
         LEDConnect = findViewById(R.id.LEDConnect);
-        Loading = findViewById(R.id.Loading);
-        TestNtuData = findViewById(R.id.TestNtuData);
-        TestTempData = findViewById(R.id.TestTempData);
-        gogogo = findViewById(R.id.gogogo);
+        Loading = new ProgressDialog(this);
+        Loading.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Loading.show();
+        inflater = getLayoutInflater();
+        header = inflater.inflate(R.layout.tempinformation,null);
+        StConnect = header.findViewById(R.id.StConnect);
+        final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         context = this;
 
+        BTPairing.setText("연결중");
+        NtuConnect.setText("연결중");
+        PhConnect.setText("연결중");
+        TempConnect.setText("연결중");
+        CameraConnect.setText("연결중");
+        LEDConnect.setText("연결중");
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -79,45 +91,29 @@ public class StartActivity extends AppCompatActivity {
         if(mBluetoothAdapter.isEnabled()) {
             listPairedDevices();
         }
+
         if(mBluetoothAdapter.isEnabled()) {
             mBluetoothHandler = new Handler() {
                 public void handleMessage(android.os.Message msg) {
                     if (msg.what == BT_MESSAGE_READ) {
-                        String readMessageNtu = null;
-                        try {
-                            readMessageNtu = new String((byte[]) msg.obj, "UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                        array = readMessageNtu.split(",");
-                        TestNtuData.setText(array[0]);
-                        TestTempData.setText(array[1]);
+                        BTPairing.setText("연결성공");
+                        BTPairing.setTextColor(Color.parseColor("#00BCD4"));
+                        PhConnect.setText("연결성공");
+                        PhConnect.setTextColor(Color.parseColor("#00BCD4"));
+                        TempConnect.setText("연결성공");
+                        TempConnect.setTextColor(Color.parseColor("#00BCD4"));
+                        LEDConnect.setText("연결성공");
+                        LEDConnect.setTextColor(Color.parseColor("#00BCD4"));
+                        Loading.dismiss();
+                        startActivity(intent);
+                        finish();
                     }
                 }
             };
         }
-
-        BTPairing.setText("연결성공");
-        BTPairing.setTextColor(Color.parseColor("#00BCD4"));
-        NtuConnect.setText("연결성공");
-        NtuConnect.setTextColor(Color.parseColor("#00BCD4"));
-        PhConnect.setText("연결성공");
-        PhConnect.setTextColor(Color.parseColor("#00BCD4"));
-        TempConnect.setText("연결성공");
-        TempConnect.setTextColor(Color.parseColor("#00BCD4"));
-        CameraConnect.setText("연결성공");
-        CameraConnect.setTextColor(Color.parseColor("#00BCD4"));
-        LEDConnect.setText("연결성공");
-        LEDConnect.setTextColor(Color.parseColor("#00BCD4"));
-
-        gogogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        else {
+            BTPairing.setText("연결실패");
+        }
 
     }
 
@@ -146,6 +142,7 @@ public class StartActivity extends AppCompatActivity {
         }
     }
     @Override
+    //readMessageNtu = new String((byte[]) msg.obj, "UTF-8");
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case BT_REQUEST_ENABLE:
@@ -173,13 +170,12 @@ public class StartActivity extends AppCompatActivity {
                 }
                 final CharSequence[] items = mListPairedDevices.toArray(new CharSequence[mListPairedDevices.size()]);
                 mListPairedDevices.toArray(new CharSequence[mListPairedDevices.size()]);
-
+                Toast.makeText(getApplicationContext(), "잠시만 기다려주세요.", Toast.LENGTH_LONG).show();
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int item) {
                             connectSelectedDevice(items[item].toString());
                             //mThreadConnectedBluetooth.run();
-                        Toast.makeText(getApplicationContext(), "아두이노 장치를 선택해주세요.", Toast.LENGTH_LONG).show();
                     }
                 });
                 AlertDialog alert = builder.create();
@@ -210,7 +206,7 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    private class ConnectedBluetoothThread extends Thread {
+    class ConnectedBluetoothThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;

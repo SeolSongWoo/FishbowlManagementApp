@@ -53,7 +53,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="케이스1"
+                        android:text="구피"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -96,7 +96,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="케이스2"
+                        android:text="베타"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -139,7 +139,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="케이스3"
+                        android:text="네온테트라"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 
@@ -181,7 +181,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:includeFontPadding="false"
-                        android:text="케이스4"
+                        android:text="플래티"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16dp" />
 

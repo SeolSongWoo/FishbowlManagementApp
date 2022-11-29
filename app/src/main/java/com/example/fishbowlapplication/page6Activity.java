@@ -63,15 +63,15 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
         AlertDialog.Builder dlg = new AlertDialog.Builder(page6Activity.this);
         switch (view.getId()) {
             case R.id.Setcase1:
-                dlg.setTitle("케이스1 설정");
-                dlg.setMessage("케이스1으로 환경설정 하시겠습니까?\n적정수온 : 21~26도 | 적정PH : 4~6");
+                dlg.setTitle("구피 설정");
+                dlg.setMessage("구피으로 환경설정 하시겠습니까?\n적정수온 : 22~28도 | 적정PH : 6.8~7.8");
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 21);
-                        editor.putInt("SetTemp2", 26);
-                        editor.putInt("SetPh1",4);
-                        editor.putInt("SetPh2",6);
+                        editor.putInt("SetTemp1", 22);
+                        editor.putInt("SetTemp2", 28);
+                        editor.putInt("SetPh1",7);
+                        editor.putInt("SetPh2",8);
                         editor.apply();
                         }
                     });
@@ -79,15 +79,15 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.show();
                 break;
             case R.id.Setcase2:
-                dlg.setTitle("케이스2 설정");
-                dlg.setMessage("케이스2으로 환경설정 하시겠습니까?\n적정수온 : 23~26도 | 적정PH : 4~5");
+                dlg.setTitle("베타 설정");
+                dlg.setMessage("베타로 환경설정 하시겠습니까?\n적정수온 : 26~28도 | 적정PH : 6.7~7.5");
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 23);
-                        editor.putInt("SetTemp2", 26);
-                        editor.putInt("SetPh1",4);
-                        editor.putInt("SetPh2",5);
+                        editor.putInt("SetTemp1", 26);
+                        editor.putInt("SetTemp2", 28);
+                        editor.putInt("SetPh1",7);
+                        editor.putInt("SetPh2",7);
                         editor.apply();
                     }
                 });
@@ -95,14 +95,14 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.show();
                 break;
             case R.id.Setcase3:
-                dlg.setTitle("케이스3 설정");
-                dlg.setMessage("케이스3으로 환경설정 하시겠습니까?\n적정수온 : 19~24도 | 적정PH : 5~7");
+                dlg.setTitle("네온테트라 설정");
+                dlg.setMessage("네온테트라로 환경설정 하시겠습니까?\n적정수온 : 22~30도 | 적정PH : 6~7");
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 19);
-                        editor.putInt("SetTemp2", 24);
-                        editor.putInt("SetPh1",5);
+                        editor.putInt("SetTemp1", 22);
+                        editor.putInt("SetTemp2", 30);
+                        editor.putInt("SetPh1",6);
                         editor.putInt("SetPh2",7);
                         editor.apply();
                     }
@@ -111,15 +111,15 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.show();
                 break;
             case R.id.Setcase4:
-                dlg.setTitle("케이스4 설정");
-                dlg.setMessage("케이스4으로 환경설정 하시겠습니까?\n적정수온 : 23~25도 | 적정PH : 3~5");
+                dlg.setTitle("플래티 설정");
+                dlg.setMessage("플래티로 환경설정 하시겠습니까?\n적정수온 : 22~27도 | 적정PH : 7~8");
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 23);
-                        editor.putInt("SetTemp2", 25);
-                        editor.putInt("SetPh1",3);
-                        editor.putInt("SetPh2",5);
+                        editor.putInt("SetTemp1", 22);
+                        editor.putInt("SetTemp2", 27);
+                        editor.putInt("SetPh1",7);
+                        editor.putInt("SetPh2",8);
                         editor.apply();
                     }
                 });

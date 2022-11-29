@@ -25,7 +25,7 @@ import java.util.UUID;
 
 public class MyBluetooth extends AppCompatActivity {
 
-    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothAdapter mBluetoothAdapter;
     Set<BluetoothDevice> mPairedDevices;
     List<String> mListPairedDevices;
     Handler mBluetoothHandler;
@@ -43,11 +43,12 @@ public class MyBluetooth extends AppCompatActivity {
     final static int BT_CONNECTING_STATUS = 3;
     final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    public MyBluetooth(Activity activity) {
+    MyBluetooth(Activity activity) {
         this.activity = activity;
     }
 
-    void bluetoothOn() {
+    public void bluetoothOn() {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(mBluetoothAdapter == null) {
             BT_isEnable = 0;
         }
@@ -63,7 +64,7 @@ public class MyBluetooth extends AppCompatActivity {
             }
         }
     }
-    void bluetoothOff() {
+    public void bluetoothOff() {
         if (mBluetoothAdapter.isEnabled()) {
             mBluetoothAdapter.disable();
             Toast.makeText(getApplicationContext(), "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show();
@@ -74,7 +75,7 @@ public class MyBluetooth extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case BT_REQUEST_ENABLE:
                 if (resultCode == RESULT_OK) { // 블루투스 활성화를 확인을 클릭하였다면
@@ -87,7 +88,7 @@ public class MyBluetooth extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    void listPairedDevices() {
+    public void listPairedDevices() {
         if (mBluetoothAdapter.isEnabled()) {
             mPairedDevices = mBluetoothAdapter.getBondedDevices();
 
@@ -121,7 +122,7 @@ public class MyBluetooth extends AppCompatActivity {
             Toast.makeText(activity, "블루투스가 비활성화 되어 있습니다.", Toast.LENGTH_SHORT).show();
         }
     }
-    void connectSelectedDevice(String selectedDeviceName) {
+    public void connectSelectedDevice(String selectedDeviceName) {
         for(BluetoothDevice tempDevice : mPairedDevices) {
             if (selectedDeviceName.equals(tempDevice.getName())) {
                 mBluetoothDevice = tempDevice;
@@ -140,7 +141,7 @@ public class MyBluetooth extends AppCompatActivity {
         }
     }
 
-    private class ConnectedBluetoothThread extends Thread {
+    class ConnectedBluetoothThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;

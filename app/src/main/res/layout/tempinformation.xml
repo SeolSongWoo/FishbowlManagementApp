@@ -253,12 +253,13 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/ic_direction" />
+
                     <TextView
                         android:id="@+id/hour4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="40dp"/>
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/Text4hour"
@@ -279,12 +280,13 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/ic_direction" />
+
                     <TextView
                         android:id="@+id/hour8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="40dp"/>
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/Text8hour"
@@ -305,12 +307,13 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/ic_direction" />
+
                     <TextView
                         android:id="@+id/hour12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="40dp"/>
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/Text12hour"
@@ -331,12 +334,13 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/ic_direction" />
+
                     <TextView
                         android:id="@+id/hour16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="40dp"/>
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/Text16hour"
@@ -357,12 +361,13 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/ic_direction" />
+
                     <TextView
                         android:id="@+id/hour20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="40dp"/>
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/Text20hour"
@@ -383,12 +388,13 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/ic_direction" />
+
                     <TextView
                         android:id="@+id/hour24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="40dp" />
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/Text24hour"

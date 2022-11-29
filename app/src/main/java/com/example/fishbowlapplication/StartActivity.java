@@ -78,6 +78,7 @@ public class StartActivity extends AppCompatActivity {
         final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         context = this;
 
+
         BTPairing.setText("연결중");
         NtuConnect.setText("연결중");
         PhConnect.setText("연결중");

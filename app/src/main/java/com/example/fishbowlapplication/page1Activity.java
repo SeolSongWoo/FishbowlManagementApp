@@ -33,24 +33,8 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         dbHelper = new DBHelper(page1Activity.this, 1);
-        /*
-        ((StartActivity) StartActivity.context).mBluetoothHandler = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                if (msg.what == BT_MESSAGE_READ) {
-                    String readMessageNtu = null;
-                    try {
-                        readMessageNtu = new String((byte[]) msg.obj, "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    array = readMessageNtu.split(",");
-                    Nturesult2.setText(array[0]);
-                    Phresult2.setText(array[1]);
-                }
-            }
-        };
-
-         */
+        Nturesult2.setText(((MainActivity)MainActivity.context_main).SetNtu.getText());
+        Phresult2.setText(((MainActivity)MainActivity.context_main).Phresult.getText());
         super.onResume();
     }
     @Override

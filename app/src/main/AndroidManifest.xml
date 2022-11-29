@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fishbowlapplication">
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        >
         <activity android:name=".page6Activity"></activity>
-        <activity android:name=".page1Activity" />
         <activity android:name=".DBTESTActivity" />
+        <activity android:name=".page1Activity" />
+        <activity android:name=".URLTestActivity" />
         <activity android:name=".Main2_2Activity" />
         <activity android:name=".page1_2Activity" />
         <activity android:name=".page1_1Activity" />
@@ -20,14 +27,15 @@
         <activity android:name=".page4Activity" />
         <activity android:name=".page3Activity" />
         <activity android:name=".page2Activity" />
-        <activity android:name=".MainActivity">
-        <!-- <activity android:name=".StartActivity"> -->
+        <activity android:name=".StartActivity"/>
+            <activity android:name=".MainActivity">
+
+            <!-- <activity android:name=".StartActivity"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

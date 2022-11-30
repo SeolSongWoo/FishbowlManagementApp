@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable-v24/bin_blue.xml" value="0.157" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable-v24/bin_blue_loginface.xml" value="0.1915" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.157" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable/bg_marker.xml" value="0.157" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable/bg_marker_tail.xml" value="0.157" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable/bin_blue_login.xml" value="0.156" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable/dialog_selector.xml" value="0.157" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/drawable/dialog_selector_negative.xml" value="0.157" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_dbtest.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_login.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_main2_2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page1.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page1_1.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page1_2.xml" value="0.3509963768115942" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page3.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page4.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page5.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_page6.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_signup.xml" value="0.2" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/activity_start.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/custom_marker_view.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/dialog_progress.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/dialoginput.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/mp.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/te2ry/FishbowlManagementApp/app/src/main/res/layout/tempinformation.xml" value="0.358695652173913" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -18,8 +18,6 @@ import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
 
-import static com.example.fishbowlapplication.StartActivity.BT_MESSAGE_READ;
-
 public class page1Activity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout Mpage1_1,Mpage1_2,Mpage1_3;
     DBHelper dbHelper;
@@ -72,9 +70,9 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+/*                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
                                 ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("16,0,0,0");
-                            }
+                            }*/
                         }
                     });
                     dlg.setNegativeButton("아니요", null);
@@ -89,9 +87,9 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+/*                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
                                 ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("17,0,0,0");
-                            }
+                            }*/
                         }
                     });
                     dlg.setNegativeButton("아니요", null);

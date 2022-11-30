@@ -109,14 +109,18 @@ public class page2Activity extends AppCompatActivity {
                 dlg.setPositiveButton("예",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+/*
                         ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("18,0,0,0");
+*/
                     }
                 });
 
                 dlg.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+/*
                         ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("19,0,0,0");
+*/
                     }
                 });
                 dlg.show();

@@ -16,19 +16,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name=".page6Activity"></activity>
-        <activity android:name=".DBTESTActivity" />
-        <activity android:name=".page1Activity" />
-        <activity android:name=".URLTestActivity" />
-        <activity android:name=".Main2_2Activity" />
-        <activity android:name=".page1_2Activity" />
-        <activity android:name=".page1_1Activity" />
-        <activity android:name=".page5Activity" />
-        <activity android:name=".page4Activity" />
-        <activity android:name=".page3Activity" />
-        <activity android:name=".page2Activity" />
-        <activity android:name=".StartActivity"/>
-            <activity android:name=".MainActivity">
+        <activity android:name=".page6Activity" android:exported="false"/>
+        <activity android:name=".page1Activity" android:exported="false"/>
+        <activity android:name=".URLTestActivity" android:exported="false"/>
+        <activity android:name=".Main2_2Activity" android:exported="false"/>
+        <activity android:name=".page1_2Activity" android:exported="false"/>
+        <activity android:name=".page1_1Activity" android:exported="false"/>
+        <activity android:name=".page5Activity" android:exported="false"/>
+        <activity android:name=".page4Activity" android:exported="false"/>
+        <activity android:name=".page3Activity" android:exported="false"/>
+        <activity android:name=".page2Activity" android:exported="false"/>
+        <activity android:name=".MainActivity" android:exported="false"/>
+        <activity android:name=".SignupActivity" android:exported="false"/>
+        <activity android:name=".LoginActivity" android:exported="true">
 
             <!-- <activity android:name=".StartActivity"> -->
             <intent-filter>

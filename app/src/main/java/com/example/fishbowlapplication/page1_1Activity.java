@@ -82,7 +82,7 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
                 StringBuilder sb;
                 try {
                     sb = new StringBuilder();
-                    githubEndpoint = new URL("http://192.168.0.8:8080/data/ntu");
+                    githubEndpoint = new URL("http://127.0.0.1:8080/data/ntu");
                     HttpURLConnection myConnection =
                             (HttpURLConnection) githubEndpoint.openConnection();
                     myConnection.setRequestMethod("GET");
@@ -145,7 +145,7 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
                 }
                 try {
                     sb = new StringBuilder();
-                    githubEndpoint = new URL("http://192.168.0.8:8080/data/ph");
+                    githubEndpoint = new URL("http://127.0.0.1ss:8080/data/ph");
                     HttpURLConnection myConnection =
                             (HttpURLConnection) githubEndpoint.openConnection();
                     myConnection.setRequestMethod("GET");

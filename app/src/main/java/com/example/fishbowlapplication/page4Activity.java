@@ -80,25 +80,25 @@ public class page4Activity extends AppCompatActivity {
                 R = pref.getInt("r",0);
                 G = pref.getInt("g",0);
                 B = pref.getInt("b",0);
-                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+/*                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
                     ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("11"+","+Integer.toString(R)+","+Integer.toString(G)+","+Integer.toString(B));
-                }
+                }*/
             }
         });
         rgbOFF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+/*                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
                     ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("12,0,0,0");
-                }
+                }*/
             }
         });
         rgbMode1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
+/*                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
                     ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("13,0,0,0");
-                }
+                }*/
             }
         });
     }

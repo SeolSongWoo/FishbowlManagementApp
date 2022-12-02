@@ -259,7 +259,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="35dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/Text4hour"
@@ -286,7 +286,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="35dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/Text8hour"
@@ -313,7 +313,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="35dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/Text12hour"
@@ -340,7 +340,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="35dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/Text16hour"
@@ -367,7 +367,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="35dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/Text20hour"
@@ -394,7 +394,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35"
-                        android:textSize="35dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/Text24hour"

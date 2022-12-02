@@ -6,28 +6,47 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.util.JsonReader;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     static Context context_main;
@@ -51,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 StringBuilder sb;
                 try {
                     sb = new StringBuilder();
-                    githubEndpoint = new URL("http://192.168.1.247:8080/data/temp/lastdata");
+                    githubEndpoint = new URL("http://192.168.0.2/");
                     HttpURLConnection myConnection =
                             (HttpURLConnection) githubEndpoint.openConnection();
                     myConnection.setRequestMethod("GET");
@@ -64,9 +83,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             sb.append(line);
                         }
                         br.close();
-                        JSONObject jsonObject = new JSONObject(sb.toString());
-                        JSONObject jsonObject1 = jsonObject.getJSONObject("data");
-                        Temresult.setText(jsonObject1.getString("sensorValue"));
+                        sb.deleteCharAt(sb.length()-2);
+                        final JSONObject jsonObject = new JSONObject(sb.toString());
+                        runOnUiThread(new Runnable(){
+                            @Override
+                            public void run() {
+                                try {
+                                    SetNtu.setText(jsonObject.getString("turbidity"));
+                                    Temresult.setText(jsonObject.getString("temp"));
+                                    Phresult.setText(jsonObject.getString("PH"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                         myConnection.disconnect();
                     }
                 } catch (Exception e) {
@@ -74,53 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 try {
                     sb = new StringBuilder();
-                    githubEndpoint = new URL("http://192.168.1.247:8080/data/ph/lastdata");
-                    HttpURLConnection myConnection =
-                            (HttpURLConnection) githubEndpoint.openConnection();
-                    myConnection.setRequestMethod("GET");
-                    if (myConnection.getResponseCode() == 200) {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(
-                                myConnection.getInputStream(), "utf-8"
-                        ));
-                        String line;
-                        while((line = br.readLine()) != null) {
-                            sb.append(line);
-                        }
-                        br.close();
-                        JSONObject jsonObject = new JSONObject(sb.toString());
-                        JSONObject jsonObject1 = jsonObject.getJSONObject("data");
-                        Phresult.setText(jsonObject1.getString("sensorValue"));
-                        myConnection.disconnect();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    sb = new StringBuilder();
-                    githubEndpoint = new URL("http://192.168.1.247:8080/data/ntu/lastdata");
-                    HttpURLConnection myConnection =
-                            (HttpURLConnection) githubEndpoint.openConnection();
-                    myConnection.setRequestMethod("GET");
-                    if (myConnection.getResponseCode() == 200) {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(
-                                myConnection.getInputStream(), "utf-8"
-                        ));
-                        String line;
-                        while((line = br.readLine()) != null) {
-                            sb.append(line);
-                        }
-                        br.close();
-                        JSONObject jsonObject = new JSONObject(sb.toString());
-                        JSONObject jsonObject1 = jsonObject.getJSONObject("data");
-                        SetNtu.setText(jsonObject1.getString("sensorValue"));
-                        myConnection.disconnect();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    sb = new StringBuilder();
-                    githubEndpoint = new URL("http://192.168.1.247:8080/data/temp");
+                    githubEndpoint = new URL("http://192.168.0.8:8080/data/temp");
                     HttpURLConnection myConnection =
                             (HttpURLConnection) githubEndpoint.openConnection();
                     myConnection.setRequestMethod("GET");
@@ -137,8 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         JSONArray jsonObject1 = jsonObject.getJSONArray("data");
                         jsonList2 = new ArrayList<>();
                         for (int i = 0; i < jsonObject1.length(); i++) {
-                            JSONObject jsonObject2 = new JSONObject(String.valueOf(jsonObject1.getJSONObject(i)));
-                            jsonList2.add(toMap(jsonObject2));
+                            JSONArray jsonObject2 = jsonObject1.getJSONArray(i);
+                            LinkedHashMap<String,Object> temp = new LinkedHashMap<>();
+                            temp.put("temp",jsonObject2.get(0));
+                            jsonList2.add(temp);
                         }
 
                         myConnection.disconnect();
@@ -237,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String key = keyItr.next();
             Object value = object.get(key);
 
-            map.put(key,value);
+            map.put("temp",value);
         }
         return map;
     }

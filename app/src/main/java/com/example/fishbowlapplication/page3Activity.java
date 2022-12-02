@@ -32,6 +32,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -50,7 +51,8 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
     MyMarkerView marker;
     LayoutInflater inflater;
     View header;
-    int [] arrdata,TempWeeksArray;
+    double [] arrdata;
+    double[] TempWeeksArray;
     double[] TempWeeks = new double[7];
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -101,36 +103,26 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
         Tempdate.setAdapter(adapter);
         dbHelper = new DBHelper(page3Activity.this,1);
         //arrdata = dbHelper.latelyTem(24);
-        arrdata = arraydata(((MainActivity)MainActivity.context_main).jsonList2,24);
+        arrdata = arraydataDouble(((MainActivity)MainActivity.context_main).jsonList2,24);
 
         //TempWeeksArray = dbHelper.latelyTem(168);
-        TempWeeksArray = arraydata(((MainActivity)MainActivity.context_main).jsonList2,168);
+        TempWeeksArray = arraydataDouble(((MainActivity)MainActivity.context_main).jsonList2,168);
 
-        int i=0,j=0,count=1,sum=0;
+        int i=0,j=0,count=1;
+        double sum=0;
         while(j != 7) {
             if(TempWeeksArray[i] == 0) { break; }
             sum = sum + TempWeeksArray[i];
             if(count==24) {
+                TempWeeks[j] = sum / count;
                 count=1;
-                TempWeeks[j] = (double) sum;
                 j++;
                 sum=0;
             }
             count++;
             i++;
         }
-        double sums =0;
-        if(j==0) {
-            map = ((MainActivity) MainActivity.context_main).jsonList2;
-            for(int x=0; x<=map.size(); x++) {
-                sums += (double) TempWeeksArray[x];
-            }
-            sums = sums/map.size();
-            TempWeeks[0] = sums;
-        }
-/*        for(int x=0; x<7; x++) {
-            TempWeeks[x] = TempWeeks[x] / 24;
-        }*/
+
 
 
 
@@ -177,10 +169,8 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
                         }
                     }
                     else if (pref.getInt("Spinner24", 0) == 0) {
-                        map = ((MainActivity) MainActivity.context_main).jsonList2;
-                        for (int i = 0; i < map.size(); i++) {
-                            if (i > 23) { break; }
-                            entries.add((new Entry(i + 1, Integer.valueOf(map.get(i).get("sensorValue").toString()))));
+                        for (int i = 0; i < arrdata.length; i++) {
+                            entries.add((new Entry(i+1,(float) arrdata[i])));
                         }
                     }
                     LineDataSet lineDataSet = new LineDataSet(entries,"수온");
@@ -210,8 +200,8 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
                     yRAxis.setDrawGridLines(false);
 
                     if(pref.getInt("Spinner24",0) == 1 ) {
-                        yLAxis.setAxisMinimum(24);
-                        yRAxis.setAxisMinimum(20);
+                        yLAxis.setAxisMinimum(18);
+                        yRAxis.setAxisMinimum(18);
                     }
                     else if(pref.getInt("Spinner24",0) == 0) {
                         yLAxis.setAxisMinimum(18);
@@ -234,7 +224,7 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
                     break;
 
                 case R.id.RBinfor:
-
+                    DecimalFormat df = new DecimalFormat("0.00");
                     if(pref.getInt("Spinner24",0) == 1 ) {
                         Text4hour.setText("최근1일전");
                         Text8hour.setText("최근2일전");
@@ -264,49 +254,39 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
                         double avg;
                         grapadd.removeAllViews();
                         grapadd.addView(tempinformation);
-                        int check = 0;
-                        for(check = 0; check <TempWeeks.length; check++) {
-                            if(TempWeeks[check] == (double) 0) {break;}
+                        for(int i=0; i<TempWeeks.length; i++) {
+                                sum += TempWeeks[i];
+                                max = Math.max(TempWeeks[i],max);
+                                min = Math.min(TempWeeks[i],min);
                         }
-                        if(check == 1) {
-                            tempresult.setText(Double.toString(TempWeeks[0]) + "도");
-                            maxtemp.setText("데이터가 부족합니다.");
-                            mintemp.setText("데이터가 부족합니다.");
-                            avgtemp.setText("데이터가 부족합니다.");
-                        }else {
-                            for(int i=0; i<check; i++) {
-                                sum += TempWeeks[check];
-                                max = Math.max(TempWeeks[check],max);
-                                min = Math.max(TempWeeks[check],min);
-                            }
-                            avg = sum / check;
-                            maxtemp.setText(Double.toString(max)+"도");
-                            mintemp.setText(Double.toString(min)+"도");
-                            avgtemp.setText(Double.toString(avg)+"도");
-                        }
+                        tempresult.setText(df.format(TempWeeks[0]) + "도");
+                            avg = sum / TempWeeks.length;
+                            maxtemp.setText(df.format(max)+"도");
+                            mintemp.setText(df.format(min)+"도");
+                            avgtemp.setText(df.format(avg)+"도");
                         for(int i=0; i<TempWeeks.length-1; i++) {
-                            hourtemp[i].setText(Double.toString(TempWeeks[i]));
+                            hourtemp[i].setText(df.format(TempWeeks[i]));
 
                         }
                     }
                     else if(pref.getInt("Spinner24",0) == 0 ) {
-                        int max = 0, min = 100, sum = 0;
+                        double max = 0, min = 100, sum = 0;
                         double avg;
                         grapadd.removeAllViews();
                         grapadd.addView(tempinformation);
-                        for (int i = 0; i < map.size(); i++) {
-                            sum += Integer.valueOf(map.get(i).get("sensorValue").toString());
-                            max = Math.max(Integer.valueOf(map.get(i).get("sensorValue").toString()), max);
+                        for (int i = 0; i < arrdata.length; i++) {
+                            sum += arrdata[i];
+                            max = Math.max(arrdata[i], max);
+                            min = Math.min(arrdata[i], min);
                         }
-                        for (int i = 0; i < map.size(); i++)
-                            min = Math.min(Integer.valueOf(map.get(i).get("sensorValue").toString()), max);
-                        avg = sum / map.size();
-                        tempresult.setText(Integer.valueOf(map.get(0).get("sensorValue").toString()) + "도");
-                        maxtemp.setText(Integer.toString(max) + "도");
-                        mintemp.setText(Integer.toString(min) + "도");
-                        avgtemp.setText(Double.toString(avg) + "도");
+                        avg = sum / arrdata.length;
+                        tempresult.setText(df.format(arrdata[0]) + "도");
+                        avg = sum / arrdata.length;
+                        maxtemp.setText(df.format(max)+"도");
+                        mintemp.setText(df.format(min)+"도");
+                        avgtemp.setText(df.format(avg)+"도");
                         for (int i = 3; i < arrdata.length; i = i + 4) {
-                            hourtemp[i / 4].setText(Integer.toString(arrdata[i]));
+                            hourtemp[i / 4].setText(df.format(arrdata[i]));
                         }
                     }
 
@@ -316,13 +296,14 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
         }
     }
 
-    public int[] arraydata(List<LinkedHashMap<String,Object>> jsonList, int date) {
-        int[] data = new int[date];
+    public double[] arraydataDouble(List<LinkedHashMap<String,Object>> jsonList, int date) {
+        double[] data = new double[date];
         for (int x = 0; x < jsonList.size(); x++) {
-            if (x > date) {
+            if (x > date-1) {
                 break;
             }
-            data[x] = Integer.valueOf(jsonList.get(x).get("sensorValue").toString());
+            Double aDouble = (Double) jsonList.get(x).get("temp");
+            data[x] = aDouble.doubleValue();
         }
         return data;
     }

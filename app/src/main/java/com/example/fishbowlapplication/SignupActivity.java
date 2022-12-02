@@ -38,7 +38,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 map.put("usersName",signup_name.getText().toString());
                 map.put("usersEmail",signup_email.getText().toString());
 
-                NetworkTask networkTask = new NetworkTask("http://192.168.1.247:8080/user/signup",map);
+                NetworkTask networkTask = new NetworkTask("http://192.168.0.8:8080/user/signup",map);
                 networkTask.execute();
                 break;
         }

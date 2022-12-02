@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String url = "http://192.168.1.247:8080/user/check";
+                String url = "http://192.168.0.8:8080/user/check";
                 NetworkTask networkTask = new NetworkTask(url, null);
                 networkTask.execute();
                 break;

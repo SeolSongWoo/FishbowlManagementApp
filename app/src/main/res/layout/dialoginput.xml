@@ -57,7 +57,7 @@
             android:textColorHint="@color/divider"
             android:hint="1"
             android:ems="2"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:textColorHint="@color/divider"
             android:hint="9"
             android:ems="2"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
     </LinearLayout>
 
 </LinearLayout>

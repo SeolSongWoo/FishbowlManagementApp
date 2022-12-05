@@ -96,7 +96,12 @@ public class RequestHttpURLConnection {
             }
 
             JSONObject jsonObject = new JSONObject(sb.toString());
-            String page = jsonObject.getString("data");
+            String page = null;
+            try {
+                page = jsonObject.getString("data");
+            }catch(JSONException e) {
+                e.printStackTrace();
+            }
 
             return page;
 

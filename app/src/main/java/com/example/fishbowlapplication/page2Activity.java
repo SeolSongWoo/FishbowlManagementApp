@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,9 @@ import android.widget.TimePicker;
 import com.lakue.lakuepopupactivity.PopupActivity;
 import com.lakue.lakuepopupactivity.PopupGravity;
 import com.lakue.lakuepopupactivity.PopupType;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class page2Activity extends AppCompatActivity {
 
@@ -109,9 +113,23 @@ public class page2Activity extends AppCompatActivity {
                 dlg.setPositiveButton("예",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-/*
-                        ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("18,0,0,0");
-*/
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                StringBuilder sb = new StringBuilder();
+                                URL githubEndpoint = new URL("http://192.168.0.2/dcon");
+                                HttpURLConnection myConnection =
+                                        (HttpURLConnection) githubEndpoint.openConnection();
+                                myConnection.setRequestMethod("GET");
+                                if (myConnection.getResponseCode() == 200) {
+                                    myConnection.disconnect();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                     }
                 });
 

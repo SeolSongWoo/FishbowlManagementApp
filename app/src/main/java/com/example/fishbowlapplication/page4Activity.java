@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorSpace;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -17,7 +18,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class page4Activity extends AppCompatActivity {
     ImageView RGBControl;
@@ -80,17 +90,45 @@ public class page4Activity extends AppCompatActivity {
                 R = pref.getInt("r",0);
                 G = pref.getInt("g",0);
                 B = pref.getInt("b",0);
-/*                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
-                    ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("11"+","+Integer.toString(R)+","+Integer.toString(G)+","+Integer.toString(B));
-                }*/
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            StringBuilder sb = new StringBuilder();
+                            URL githubEndpoint = new URL("http://192.168.0.2:81/?r" + r + "g" + g + "b" + b + "&");
+                            HttpURLConnection myConnection =
+                                    (HttpURLConnection) githubEndpoint.openConnection();
+                            myConnection.setRequestMethod("GET");
+                            if (myConnection.getResponseCode() == 200) {
+                                myConnection.disconnect();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
         rgbOFF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*                if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
-                    ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("12,0,0,0");
-                }*/
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            StringBuilder sb = new StringBuilder();
+                            URL githubEndpoint = new URL("http://192.168.0.2:81/?r0g0b0&");
+                            HttpURLConnection myConnection =
+                                    (HttpURLConnection) githubEndpoint.openConnection();
+                            myConnection.setRequestMethod("GET");
+                            if (myConnection.getResponseCode() == 200) {
+                                myConnection.disconnect();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
         rgbMode1.setOnClickListener(new View.OnClickListener() {

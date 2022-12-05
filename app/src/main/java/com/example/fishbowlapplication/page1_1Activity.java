@@ -82,7 +82,7 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
                 StringBuilder sb;
                 try {
                     sb = new StringBuilder();
-                    githubEndpoint = new URL("http://127.0.0.1:8080/data/ntu");
+                    githubEndpoint = new URL("http://192.168.0.8:8080/data/ntu");
                     HttpURLConnection myConnection =
                             (HttpURLConnection) githubEndpoint.openConnection();
                     myConnection.setRequestMethod("GET");
@@ -98,15 +98,17 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
                         JSONObject jsonObject = new JSONObject(sb.toString());
                         JSONArray jsonObject1 = jsonObject.getJSONArray("data");
                         jsonList = new ArrayList<>();
-                        for(int i=0;i<jsonObject1.length(); i++) {
-                            JSONObject jsonObject2 = new JSONObject(String.valueOf(jsonObject1.getJSONObject(i)));
-                            jsonList.add(toMap(jsonObject2));
+                        for (int i = 0; i < jsonObject1.length(); i++) {
+                            JSONArray jsonObject2 = jsonObject1.getJSONArray(i);
+                            LinkedHashMap<String,Object> temp = new LinkedHashMap<>();
+                            temp.put("ntu",jsonObject2.get(0));
+                            jsonList.add(temp);
                         }
                         myConnection.disconnect();
-                        float[] arrdata = arraydata(jsonList,24);
+                        double[] arrdata = arraydataDouble(jsonList,24,1);
                         //j = arrdata.length;
                         for (int i = 0; i < arrdata.length; i++) {
-                            entries.add(new BarEntry(i+1, arrdata[i]));
+                            entries.add(new BarEntry(i+1, (float)arrdata[i]));
                             //j--;
                         }
 
@@ -131,8 +133,8 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
 
                         YAxis YLAxis = NtuBarchart.getAxisLeft();
                         YAxis YRAxis = NtuBarchart.getAxisRight();
-                        YLAxis.setAxisMinimum(0);
-                        YRAxis.setAxisMinimum(0);
+                        YLAxis.setAxisMinimum((float) 2.4);
+                        YRAxis.setAxisMinimum((float) 2.4);
 
                         NtuBarchart.getAxisLeft().setDrawGridLines(false);
 
@@ -145,7 +147,7 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
                 }
                 try {
                     sb = new StringBuilder();
-                    githubEndpoint = new URL("http://127.0.0.1ss:8080/data/ph");
+                    githubEndpoint = new URL("http://192.168.0.8:8080/data/ph");
                     HttpURLConnection myConnection =
                             (HttpURLConnection) githubEndpoint.openConnection();
                     myConnection.setRequestMethod("GET");
@@ -162,8 +164,10 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
                         JSONArray jsonObject1 = jsonObject.getJSONArray("data");
                         jsonList2 = new ArrayList<>();
                         for (int i = 0; i < jsonObject1.length(); i++) {
-                            JSONObject jsonObject2 = new JSONObject(String.valueOf(jsonObject1.getJSONObject(i)));
-                            jsonList2.add(toMap(jsonObject2));
+                            JSONArray jsonObject2 = jsonObject1.getJSONArray(i);
+                            LinkedHashMap<String,Object> temp = new LinkedHashMap<>();
+                            temp.put("ph",jsonObject2.get(0));
+                            jsonList2.add(temp);
                         }
                         myConnection.disconnect();
                     }
@@ -185,10 +189,10 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
         if (RGntuph == radioGroup) {
             if (checkedid == R.id.RBNtu) {
                 ArrayList<BarEntry> entries = new ArrayList<>();
-                float[] arrdata = arraydata(jsonList,24);
+                double[] arrdata = arraydataDouble(jsonList,24,1);
                 //j = arrdata.length;
                 for (int i = 0; i < arrdata.length; i++) {
-                    entries.add(new BarEntry(i+1, arrdata[i]));
+                    entries.add(new BarEntry(i+1, (float) arrdata[i]));
                     //j--;
                 }
 
@@ -213,8 +217,8 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
 
                 YAxis YLAxis = NtuBarchart.getAxisLeft();
                 YAxis YRAxis = NtuBarchart.getAxisRight();
-                YLAxis.setAxisMinimum(0);
-                YRAxis.setAxisMinimum(0);
+                YLAxis.setAxisMinimum((float) 2.4);
+                YRAxis.setAxisMinimum((float) 2.4);
 
                 NtuBarchart.getAxisLeft().setDrawGridLines(false);
 
@@ -224,10 +228,10 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
         }
             if (checkedid == R.id.RBPh) {
                 ArrayList<BarEntry> entries = new ArrayList<>();
-                float[] arrdata = arraydata(jsonList2,24);
+                double[] arrdata = arraydataDouble(jsonList2,24,2);
                 //j = arrdata.length;
                 for (int i = 0; i < arrdata.length; i++) {
-                    entries.add(new BarEntry(i+1, arrdata[i]));
+                    entries.add(new BarEntry(i+1, (float) arrdata[i]));
                     //j--;
                 }
 
@@ -252,8 +256,8 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
 
                 YAxis YLAxis = NtuBarchart.getAxisLeft();
                 YAxis YRAxis = NtuBarchart.getAxisRight();
-                YLAxis.setAxisMinimum(0);
-                YRAxis.setAxisMinimum(0);
+                YLAxis.setAxisMinimum((float) 2.4);
+                YRAxis.setAxisMinimum((float) 2.4);
 
                 NtuBarchart.getAxisLeft().setDrawGridLines(false);
 
@@ -277,11 +281,28 @@ public class page1_1Activity extends AppCompatActivity implements RadioGroup.OnC
         return map;
     }
 
-    public float[] arraydata(List<LinkedHashMap<String,Object>> jsonList,int date) {
-        float[] data = new float[date];
-        for(int x=0;x < jsonList.size(); x++) {
-            if(x>date) {break;}
-            data[x] = Float.valueOf(jsonList.get(x).get("sensorValue").toString());
+    public double[] arraydataDouble(List<LinkedHashMap<String,Object>> jsonList, int date,int index) {
+        double[] data = new double[date];
+        for (int x = 0; x < jsonList.size(); x++) {
+            if (x > date-1) {
+                break;
+            }
+            double aDouble = 0.00;
+            if(jsonList.get(x).get("ntu") instanceof Integer && index == 1) {
+                aDouble = (int) jsonList.get(x).get("ntu");
+            }else if(index == 1) {
+                aDouble = (double) jsonList.get(x).get("ntu");
+            }
+            if(jsonList.get(x).get("ph") instanceof Integer && index == 2) {
+                aDouble = (int) jsonList.get(x).get("ph");
+            }else if(index == 2) {
+                aDouble = (double) jsonList.get(x).get("ph");
+            }
+            try {
+                data[x] =  aDouble;
+            }catch(ClassCastException e) {
+
+            }
         }
         return data;
     }

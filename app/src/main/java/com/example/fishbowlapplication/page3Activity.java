@@ -200,12 +200,12 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
                     yRAxis.setDrawGridLines(false);
 
                     if(pref.getInt("Spinner24",0) == 1 ) {
-                        yLAxis.setAxisMinimum(18);
-                        yRAxis.setAxisMinimum(18);
+                        yLAxis.setAxisMinimum(20);
+                        yRAxis.setAxisMinimum(20);
                     }
                     else if(pref.getInt("Spinner24",0) == 0) {
-                        yLAxis.setAxisMinimum(18);
-                        yRAxis.setAxisMinimum(18);
+                        yLAxis.setAxisMinimum(20);
+                        yRAxis.setAxisMinimum(20);
                     }
                     Description description = new Description();
                     description.setText("");
@@ -302,8 +302,18 @@ public class page3Activity extends AppCompatActivity implements RadioGroup.OnChe
             if (x > date-1) {
                 break;
             }
-            Double aDouble = (Double) jsonList.get(x).get("temp");
-            data[x] = aDouble.doubleValue();
+            double aDouble = 0.00;
+            if(jsonList.get(x).get("temp") instanceof Integer) {
+                aDouble = (int) jsonList.get(x).get("temp");
+            }else {
+                aDouble = (double) jsonList.get(x).get("temp");
+            }
+            System.out.println(aDouble);
+            try {
+                data[x] =  aDouble;
+            }catch(ClassCastException e) {
+
+            }
         }
         return data;
     }

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.fishbowlapplication.Api.RequestHttpURLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,6 +95,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     SetNtu.setText(jsonObject.getString("turbidity"));
                                     Temresult.setText(jsonObject.getString("temp"));
                                     Phresult.setText(jsonObject.getString("PH"));
+                                    double ntu = Double.parseDouble(SetNtu.getText().toString());
+                                    if(ntu > 2.0) {
+                                        Nturesult.setText("높음(순환필요)");
+                                    }else {
+                                        Nturesult.setText("좋음");
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -128,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
 
                         myConnection.disconnect();
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -140,11 +150,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
 
-        Nturesult.setText("높음(순환필요)");
-
+        ContentValues map = new ContentValues();
+        map.put("rangeTemp1",pref.getFloat("SetTemp1",0));
+        map.put("rangeTemp2",pref.getFloat("SetTemp2",0));
+        map.put("rangePh1",pref.getFloat("SetPh1",0));
+        map.put("rangePh2",pref.getFloat("SetPh2",0));
+        MainActivity.NetworkTask networkTask = new MainActivity.NetworkTask("http://192.168.0.8:8080/data/range/save",map);
+        networkTask.execute();
         //SetNtu.setText(String.valueOf(dbHelper.LastNtuResult2()));
-        TempRange.setText("적정수온("+pref.getInt("SetTemp1",0)+"~"+pref.getInt("SetTemp2",0)+")");
-        PhRange.setText("적정PH("+pref.getInt("SetPh1",0)+"~"+pref.getInt("SetPh2",0)+")");
+        TempRange.setText("적정수온("+pref.getFloat("SetTemp1",0)+"~"+pref.getFloat("SetTemp2",0)+")");
+        PhRange.setText("적정PH("+pref.getFloat("SetPh1",0)+"~"+pref.getFloat("SetPh2",0)+")");
 
         super.onResume();
 
@@ -226,5 +241,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             map.put("temp",value);
         }
         return map;
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String result; // 요청 결과를 저장할 변수.
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 }

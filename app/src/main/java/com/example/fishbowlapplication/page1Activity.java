@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class page1Activity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout Mpage1_1,Mpage1_2,Mpage1_3;
@@ -70,9 +73,23 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-/*                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
-                                ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("16,0,0,0");
-                            }*/
+                                AsyncTask.execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            StringBuilder sb = new StringBuilder();
+                                            URL githubEndpoint = new URL("http://192.168.0.2/waterpumpon");
+                                            HttpURLConnection myConnection =
+                                                    (HttpURLConnection) githubEndpoint.openConnection();
+                                            myConnection.setRequestMethod("GET");
+                                            if (myConnection.getResponseCode() == 200) {
+                                                myConnection.disconnect();
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                         }
                     });
                     dlg.setNegativeButton("아니요", null);
@@ -87,9 +104,23 @@ public class page1Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-/*                            if(((StartActivity) StartActivity.context).mThreadConnectedBluetooth != null) {
-                                ((StartActivity) StartActivity.context).mThreadConnectedBluetooth.write("17,0,0,0");
-                            }*/
+                            AsyncTask.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        StringBuilder sb = new StringBuilder();
+                                        URL githubEndpoint = new URL("http://192.168.0.2/waterpumpoff");
+                                        HttpURLConnection myConnection =
+                                                (HttpURLConnection) githubEndpoint.openConnection();
+                                        myConnection.setRequestMethod("GET");
+                                        if (myConnection.getResponseCode() == 200) {
+                                            myConnection.disconnect();
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                         }
                     });
                     dlg.setNegativeButton("아니요", null);

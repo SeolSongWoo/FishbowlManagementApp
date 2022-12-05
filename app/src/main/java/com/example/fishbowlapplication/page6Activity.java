@@ -7,6 +7,7 @@ import androidx.core.text.PrecomputedTextCompat;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fishbowlapplication.Service.AlrimService;
 
 import java.util.Set;
 import java.util.zip.Inflater;
@@ -29,6 +33,7 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
     LinearLayout dialoginputLayout;
     View header;
     LayoutInflater inflater;
+    Button alrimon,alrimoff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,8 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
         Setcase3 = findViewById(R.id.Setcase3);
         Setcase4 = findViewById(R.id.Setcase4);
         Setcase5 = findViewById(R.id.Setcase5);
+        alrimon = findViewById(R.id.AlrimOn);
+        alrimoff = findViewById(R.id.AlrimOff);
         inflater = getLayoutInflater();
         header = inflater.inflate(R.layout.dialoginput,null);
         dialoginputLayout = header.findViewById(R.id.dialoginputLayout);
@@ -51,6 +58,8 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
         Setcase3.setOnClickListener(this);
         Setcase4.setOnClickListener(this);
         Setcase5.setOnClickListener(this);
+        alrimon.setOnClickListener(this);
+        alrimoff.setOnClickListener(this);
 
         pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         editor = pref.edit();
@@ -68,10 +77,10 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 22);
-                        editor.putInt("SetTemp2", 28);
-                        editor.putInt("SetPh1",7);
-                        editor.putInt("SetPh2",8);
+                        editor.putFloat("SetTemp1", 22);
+                        editor.putFloat("SetTemp2", 28);
+                        editor.putFloat("SetPh1", (float) 6.8);
+                        editor.putFloat("SetPh2", (float) 7.8);
                         editor.apply();
                         }
                     });
@@ -84,10 +93,10 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 26);
-                        editor.putInt("SetTemp2", 28);
-                        editor.putInt("SetPh1",7);
-                        editor.putInt("SetPh2",7);
+                        editor.putFloat("SetTemp1", 26);
+                        editor.putFloat("SetTemp2", 28);
+                        editor.putFloat("SetPh1", 6.7F);
+                        editor.putFloat("SetPh2",7.5F);
                         editor.apply();
                     }
                 });
@@ -100,10 +109,10 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 22);
-                        editor.putInt("SetTemp2", 30);
-                        editor.putInt("SetPh1",6);
-                        editor.putInt("SetPh2",7);
+                        editor.putFloat("SetTemp1", 22);
+                        editor.putFloat("SetTemp2", 30);
+                        editor.putFloat("SetPh1",6);
+                        editor.putFloat("SetPh2",7);
                         editor.apply();
                     }
                 });
@@ -116,10 +125,10 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editor.putInt("SetTemp1", 22);
-                        editor.putInt("SetTemp2", 27);
-                        editor.putInt("SetPh1",7);
-                        editor.putInt("SetPh2",8);
+                        editor.putFloat("SetTemp1", 22);
+                        editor.putFloat("SetTemp2", 27);
+                        editor.putFloat("SetPh1",7);
+                        editor.putFloat("SetPh2",8);
                         editor.apply();
                     }
                 });
@@ -127,16 +136,16 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                 dlg.show();
                 break;
             case R.id.Setcase5:
-                if(pref.getInt("PrivateSet",0) == 1) {
+                if(pref.getFloat("PrivateSet",0) == 1F) {
                     dlg.setTitle("개인설정적용");
-                    dlg.setMessage("개인설정을 완료하셨습니다.\n해당설정을 적용하시겠습니까?\n적정수온 : "+pref.getInt("SetPriTemp1",0)+"~"+pref.getInt("SetPriTemp2",0)+"도 | 적정PH : "+pref.getInt("SetPriPh1",0)+"~"+pref.getInt("SetPriPh2",0)+"");
+                    dlg.setMessage("개인설정을 완료하셨습니다.\n해당설정을 적용하시겠습니까?\n적정수온 : "+pref.getFloat("SetPriTemp1",0)+"~"+pref.getFloat("SetPriTemp2",0)+"도 | 적정PH : "+pref.getFloat("SetPriPh1",0)+"~"+pref.getFloat("SetPriPh2",0)+"");
                     dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            editor.putInt("SetTemp1", pref.getInt("SetPriTemp1",0));
-                            editor.putInt("SetTemp2", pref.getInt("SetPriTemp2",0));
-                            editor.putInt("SetPh1",pref.getInt("SetPriPh1",0));
-                            editor.putInt("SetPh2",pref.getInt("SetPriPh2",0));
+                            editor.putFloat("SetTemp1", pref.getFloat("SetPriTemp1",0));
+                            editor.putFloat("SetTemp2", pref.getFloat("SetPriTemp2",0));
+                            editor.putFloat("SetPh1",pref.getFloat("SetPriPh1",0));
+                            editor.putFloat("SetPh2",pref.getFloat("SetPriPh2",0));
                             editor.apply();
                         }
                     });
@@ -150,10 +159,10 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                             dlg2.setPositiveButton("완료", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    editor.putInt("SetPriTemp1", Integer.parseInt(editPriavteTemp1.getText().toString()));
-                                    editor.putInt("SetPriTemp2", Integer.parseInt(editPriavteTemp2.getText().toString()));
-                                    editor.putInt("SetPriPh1",Integer.parseInt(editPriavtePh1.getText().toString()));
-                                    editor.putInt("SetPriPh2",Integer.parseInt(editPriavtePh2.getText().toString()));
+                                    editor.putFloat("SetPriTemp1", Float.parseFloat(editPriavteTemp1.getText().toString()));
+                                    editor.putFloat("SetPriTemp2", Float.parseFloat(editPriavteTemp2.getText().toString()));
+                                    editor.putFloat("SetPriPh1",Float.parseFloat(editPriavtePh1.getText().toString()));
+                                    editor.putFloat("SetPriPh2",Float.parseFloat(editPriavtePh2.getText().toString()));
                                     editor.apply();
                                 }
                             });
@@ -171,17 +180,28 @@ public class page6Activity extends AppCompatActivity implements View.OnClickList
                     dlg.setPositiveButton("완료", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            editor.putInt("SetPriTemp1", Integer.parseInt(editPriavteTemp1.getText().toString()));
-                            editor.putInt("SetPriTemp2", Integer.parseInt(editPriavteTemp2.getText().toString()));
-                            editor.putInt("SetPriPh1",Integer.parseInt(editPriavtePh1.getText().toString()));
-                            editor.putInt("SetPriPh2",Integer.parseInt(editPriavtePh2.getText().toString()));
-                            editor.putInt("PrivateSet",1);
+                            editor.putFloat("SetPriTemp1", Float.parseFloat(editPriavteTemp1.getText().toString()));
+                            editor.putFloat("SetPriTemp2", Float.parseFloat(editPriavteTemp2.getText().toString()));
+                            editor.putFloat("SetPriPh1",Float.parseFloat(editPriavtePh1.getText().toString()));
+                            editor.putFloat("SetPriPh2",Float.parseFloat(editPriavtePh2.getText().toString()));
+                            editor.putFloat("PrivateSet",1);
                             editor.apply();
                         }
                     });
                     dlg.setNegativeButton("취소", null);
                     dlg.show();
                 }
+                break;
+            case R.id.AlrimOn:
+                Toast.makeText(getApplicationContext(),"이제 설정된 수치를 벗어나면 상태바에 표시됩니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(page6Activity.this, AlrimService.class);
+                startService(intent);
+                break;
+
+            case R.id.AlrimOff:
+                Toast.makeText(getApplicationContext(),"알림이 종료됩니다.", Toast.LENGTH_SHORT).show();
+                intent = new Intent(page6Activity.this,AlrimService.class);
+                stopService(intent);
                 break;
         }
     }

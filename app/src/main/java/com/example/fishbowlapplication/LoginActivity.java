@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fishbowlapplication.Api.NetworkTask;
 import com.example.fishbowlapplication.Api.RequestHttpURLConnection;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -84,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
                 String url = "http://192.168.0.8:8080/user/check";
-                NetworkTask networkTask = new NetworkTask(url, null);
+                NetworkTask networkTask = new NetworkTask(url, null,this);
                 networkTask.execute();
                 break;
             case R.id.m_signup:
@@ -93,51 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             default:
                 Toast.makeText(getApplicationContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    public class NetworkTask extends AsyncTask<Void, Void, String> {
-
-        private String url;
-        private ContentValues values;
-
-        public NetworkTask(String url, ContentValues values) {
-
-            this.url = url;
-            this.values = values;
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            String result; // 요청 결과를 저장할 변수.
-            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
-            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
-            switch(s) {
-                case "계정없음":
-                    Toast.makeText(getApplicationContext(), "계정이 존재하지않습니다.", Toast.LENGTH_SHORT).show();
-                    break;
-                case "로그인성공":
-                    Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
-                case "비밀번호틀림":
-                    Toast.makeText(getApplicationContext(), "비밀번호를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    Toast.makeText(getApplicationContext(), "로그인 실패(서버불안정)", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 }
